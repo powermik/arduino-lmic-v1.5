@@ -10,6 +10,8 @@
  *******************************************************************************/
 
 #include "lmic.h"
+#include <avr/pgmspace.h>
+
 
 // ---------------------------------------- 
 // Registers Mapping
@@ -520,7 +522,7 @@ static void starttx () {
 
 enum { RXMODE_SINGLE, RXMODE_SCAN, RXMODE_RSSI };
 
-static const u1_t rxlorairqmask[] = {
+static PROGMEM const u1_t rxlorairqmask[] = {
     [RXMODE_SINGLE] = IRQ_LORA_RXDONE_MASK|IRQ_LORA_RXTOUT_MASK,
     [RXMODE_SCAN]   = IRQ_LORA_RXDONE_MASK,
     [RXMODE_RSSI]   = 0x00,
@@ -717,7 +719,7 @@ u1_t radio_rssi () {
     return r;
 }
 
-static const u2_t LORA_RXDONE_FIXUP[] = {
+static PROGMEM const u2_t LORA_RXDONE_FIXUP[] = {
     [FSK]  =     us2osticks(0), // (   0 ticks)
     [SF7]  =     us2osticks(0), // (   0 ticks)
     [SF8]  =  us2osticks(1648), // (  54 ticks)

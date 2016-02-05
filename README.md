@@ -11,9 +11,9 @@ as some modifications in the library itself.
 
 This repository is work-in-progress.
 
-This library uses too much storage space and dynamic memory to run
-on the ATmega328 (Arduino Uno). It has been tested on Teensy 3.1 and
-Teensy LC.
+This library uses most of the storage space from an ATmega328 based 
+Arduino (UNO for example) and is therefore not very usable on these platform.
+It has been tested on Teensy 3.1 and Teensy LC.
 
 Connections
 -----------

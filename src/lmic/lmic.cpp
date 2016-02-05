@@ -11,6 +11,8 @@
 
 //! \file
 #include "lmic.h"
+#include <avr/pgmspace.h>
+
 
 #if !defined(MINRX_SYMS)
 #define MINRX_SYMS 5
@@ -228,7 +230,7 @@ const u1_t _DR2RPS_CRC[] = {
     ILLEGAL_RPS
 };
 
-static const s1_t TXPOWLEVELS[] = {
+static PROGMEM const s1_t TXPOWLEVELS[] = {
     20, 14, 11, 8, 5, 2, 0,0, 0,0,0,0, 0,0,0,0
 };
 #define pow2dBm(mcmd_ladr_p1) (TXPOWLEVELS[(mcmd_ladr_p1&MCMD_LADR_POW_MASK)>>MCMD_LADR_POW_SHIFT])
@@ -261,7 +263,7 @@ const u1_t _DR2RPS_CRC[] = {
 
 #endif // ================================================
 
-static const u1_t SENSITIVITY[7][3] = {
+static PROGMEM const u1_t SENSITIVITY[7][3] = {
     // ------------bw----------
     // 125kHz    250kHz    500kHz
     { 141-109,  141-109, 141-109 },  // FSK
@@ -345,7 +347,7 @@ extern inline int   sameSfBw (rps_t r1, rps_t r2);
 // Adjust DR for TX retries
 //  - indexed by retry count
 //  - return steps to lower DR
-static const u1_t DRADJUST[2+TXCONF_ATTEMPTS] = {
+static PROGMEM const u1_t DRADJUST[2+TXCONF_ATTEMPTS] = {
     // normal frames - 1st try / no retry
     0,
     // confirmed frames
@@ -364,7 +366,7 @@ static const u1_t DRADJUST[2+TXCONF_ATTEMPTS] = {
 //  
 // Times for half symbol per DR
 // Per DR table to minimize rounding errors
-static const ostime_t DR2HSYM_osticks[] = {
+static PROGMEM const ostime_t DR2HSYM_osticks[] = {
 #if defined(CFG_eu868)
 #define dr2hsym(dr) (DR2HSYM_osticks[(dr)])
     us2osticksRound(128<<7),  // DR_SF12
@@ -528,7 +530,7 @@ void LMIC_setPingable (u1_t intvExp) {
 // BEG: EU868 related stuff
 //
 enum { NUM_DEFAULT_CHANNELS=6 };
-static const u4_t iniChannelFreq[12] = {
+static PROGMEM const u4_t iniChannelFreq[12] = {
     // Join frequencies and duty cycle limit (0.1%)
     EU868_F1|BAND_MILLI,
     EU868_F2|BAND_MILLI,
